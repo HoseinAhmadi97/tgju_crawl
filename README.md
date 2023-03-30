@@ -72,5 +72,7 @@ tg.get_df_of_symbols()
 </div>
 
 ```python
-tg.get_tgju_data(symbol = 'انس طلا')
+
+tg.get_tgju_data(symbol = 'سکه امامی')
+
 ```

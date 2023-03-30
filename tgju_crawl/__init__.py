@@ -39,5 +39,3 @@ def get_tgju_data(symbol):
     df_data = df_data.set_index('J-Date')
     df_data=df_data[['Date','Weekday','Open','High','Low','Close', 'Symbol']]
     return df_data
-
-print(get_df_of_symbols())
