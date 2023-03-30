@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 from lxml import etree
 
 # main function
-def get_df_of_symbols(url):
+def get_df_of_symbols(url = 'https://www.tgju.org/local-markets'):
     r = requests.get(url)
     soup = BeautifulSoup(r.content, "html.parser")
     dom = etree.HTML(str(soup))
@@ -20,8 +20,7 @@ def get_df_of_symbols(url):
 
 def get_tgju_data(symbol):
     # get symbols
-    url = 'https://www.tgju.org/local-markets'
-    df_of_symbols = get_df_of_symbols(url)
+    df_of_symbols = get_df_of_symbols()
     SYMBOL = df_of_symbols.loc[symbol]['SYMBOL']
     # get data
     r = requests.get(f'https://platform.tgju.org/fa/tvdata/history?symbol={SYMBOL}')
@@ -40,4 +39,3 @@ def get_tgju_data(symbol):
     df_data = df_data.set_index('J-Date')
     df_data=df_data[['Date','Weekday','Open','High','Low','Close', 'Symbol']]
     return df_data
-
