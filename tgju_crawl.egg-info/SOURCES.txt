@@ -1,0 +1,11 @@
+.DS_Store
+.gitignore
+LICENSE.txt
+README.md
+setup.py
+tgju_crawl/__init__.py
+tgju_crawl.egg-info/PKG-INFO
+tgju_crawl.egg-info/SOURCES.txt
+tgju_crawl.egg-info/dependency_links.txt
+tgju_crawl.egg-info/requires.txt
+tgju_crawl.egg-info/top_level.txt
