@@ -19,9 +19,11 @@ def get_df_of_symbols(url):
     return df
 
 def get_tgju_data(symbol):
+    # get symbols
     url = 'https://www.tgju.org/local-markets'
     df_of_symbols = get_df_of_symbols(url)
     SYMBOL = df_of_symbols.loc[symbol]['SYMBOL']
+    # get data
     r = requests.get(f'https://platform.tgju.org/fa/tvdata/history?symbol={SYMBOL}')
     df_data = r.json()
     df_data = pd.DataFrame({'Date':df_data['t'],'Open':df_data['o'],'High':df_data['h'],'Low':df_data['l'],'Close':df_data['c'],})
@@ -39,6 +41,3 @@ def get_tgju_data(symbol):
     df_data=df_data[['Date','Weekday','Open','High','Low','Close', 'Symbol']]
     return df_data
 
-# get_symbols
-url = 'https://www.tgju.org/local-markets'
-df_of_symbols = get_df_of_symbols(url)
