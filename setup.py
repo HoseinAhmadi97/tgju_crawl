@@ -8,7 +8,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setuptools.setup(
     name='tgju_crawl',                           # should match the package folder
     packages=['tgju_crawl'],                     # should match the package folder
-    version='1.0',                                # important for updates
+    version='1.0.0',                                # important for updates
     license='BSD (3-clause)',                                  # should match your chosen license
     description='A Python Module to Access tgju.org Historical Price',
     long_description=long_description,              # loads your README.md

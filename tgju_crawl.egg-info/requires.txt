@@ -1,7 +1,0 @@
-requests
-jdatetime
-pandas
-bs4
-calendar
-datetime
-lxml
