@@ -1,4 +1,4 @@
-<div dir="rtl" align="right">
+<div dir="rtl" align="left">
 
 ##### به کمک این ماژول در محیط برنامه‌نویسی پایتون می‌توانید تاریخچه قیمتی حدود ۱۶۰ دارایی در صفحه بازار داخلی سایت tgju را در فرمت پانداز دریافت کنید.
 
@@ -15,7 +15,7 @@
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
-<div dir="rtl" align="right">
+<div dir="rtl" align="left">
 
 # نصب ماژول
 
@@ -28,7 +28,7 @@ python3 -m pip install tgju_crawl
 
 <p>&nbsp;</p>
 
-<div dir="rtl" align="right">
+<div dir="rtl" align="left">
 
 # فراخوانی ماژول
 
@@ -42,7 +42,7 @@ import tgju_crawl as tg
 
 <p>&nbsp;</p>
 
-<div dir="rtl" align="right">
+<div dir="rtl" align="left">
 
 # مشاهده نمادهای موجود در ماژول
 <hr style="border:2px solid gray"> </hr>
@@ -57,11 +57,11 @@ tg.get_df_of_symbols()
 ```
 
 
-<div dir="rtl" align="right">
+<div dir="rtl" align="left">
 
 <p>&nbsp;</p>
 
-<div dir="rtl" align="right">
+<div dir="rtl" align="left">
 
 # دریافت تاریخچه قیمت یک نماد
 <hr style="border:2px solid gray"> </hr>
