@@ -65,6 +65,6 @@ tg.get_df_of_symbols()
 
 ```python
 
-tg.get_tgju_data(symbol = 'سکه امامی')
+tg.get_tgju_data(symbol = 'حباب نیم سکه')
 
 ```
