@@ -8,7 +8,12 @@ from bs4 import BeautifulSoup
 from lxml import etree
 
 # main functions
-def get_df_of_symbols(url = 'https://www.tgju.org'):
+def get_main_symbols():
+    """
+        symbols in main page
+    """
+    
+    url = 'https://www.tgju.org'
     r = requests.get(url)
     soup = BeautifulSoup(r.content, "html.parser")
     dom = etree.HTML(str(soup))
@@ -19,8 +24,32 @@ def get_df_of_symbols(url = 'https://www.tgju.org'):
     df = df.drop_duplicates(subset = 'symbol_Fa')
     df = df[df['count_profile'] == 1].drop('count_profile', axis=1).set_index('symbol_Fa')
     df['symbol_En'] = df['href'].apply(lambda x: x.split('/')[-1])
+    df.loc['طلای دست دوم']['symbol_En'] = 'gold_mini_size'
     df['SYMBOL'] = df['symbol_En'].apply(lambda x: x.upper()) 
-    return df.drop('href', axis=1)
+    df = df.drop('href', axis=1).drop_duplicates()
+    return df
+    
+def get_energy_symbols():
+    """
+       symbols in energy page 
+    """
+    
+    url = 'https://www.tgju.org/energy'
+    r = requests.get(url)
+    soup = BeautifulSoup(r.content, "html.parser")
+    dom = etree.HTML(str(soup))
+    symbol_Fa = dom.xpath('//table[contains(@class,"market-table")]/tbody/tr/th/span/following-sibling::text()')
+    href = dom.xpath('//table[contains(@class,"market-table")]/tbody/tr/@onclick')
+    df = pd.DataFrame({'symbol_Fa': symbol_Fa, 'href': href})
+    df['symbol_En'] = df['href'].apply(lambda x: x.split('/')[-1][:-1])
+    df['SYMBOL'] = df['symbol_En'].apply(lambda x: x.upper())
+    df = df.drop_duplicates().drop(['href'], axis=1).set_index('symbol_Fa')
+    return df
+    
+
+def get_df_of_symbols():
+    df = pd.concat([get_main_symbols(), get_energy_symbols()], axis=0)
+    return df.drop_duplicates()
 
 def get_tgju_data(symbol):
     # get symbols
