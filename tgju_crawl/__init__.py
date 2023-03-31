@@ -46,7 +46,6 @@ def get_energy_symbols():
     df = df.drop_duplicates().drop(['href'], axis=1).set_index('symbol_Fa')
     return df
     
-
 def get_df_of_symbols():
     df = pd.concat([get_main_symbols(), get_energy_symbols()], axis=0)
     df['indicator'] = df[['symbol_En', 'SYMBOL']].apply(lambda x: 1 if x['symbol_En'] == x['SYMBOL'] else 0, axis=1)
