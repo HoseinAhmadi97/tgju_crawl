@@ -49,6 +49,8 @@ def get_energy_symbols():
 
 def get_df_of_symbols():
     df = pd.concat([get_main_symbols(), get_energy_symbols()], axis=0)
+    df['indicator'] = df[['symbol_En', 'SYMBOL']].apply(lambda x: 1 if x['symbol_En'] == x['SYMBOL'] else 0, axis=1)
+    df = df[df['indicator'] == 0].drop('indicator', axis=1)
     return df.drop_duplicates()
 
 def get_tgju_data(symbol):
