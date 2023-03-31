@@ -7,16 +7,19 @@ import jdatetime
 from bs4 import BeautifulSoup
 from lxml import etree
 
-# main function
-def get_df_of_symbols(url = 'https://www.tgju.org/local-markets'):
+# main functions
+def get_df_of_symbols(url = 'https://www.tgju.org'):
     r = requests.get(url)
     soup = BeautifulSoup(r.content, "html.parser")
     dom = etree.HTML(str(soup))
-    row = dom.xpath('//table/tbody/tr/th/text()')
-    symbol = dom.xpath('//table/tbody/tr/@data-market-row')
-    df = (pd.DataFrame({'type': row, 'symbol': symbol})[:-11]).set_index('type')
-    df['SYMBOL'] = df['symbol'].apply(lambda x: x.upper()) 
-    return df
+    href = (dom.xpath('//div[@class = "nav-links"]/div[2]/ul/li/div/div/ul/li/ul/li/a/@href'))
+    symbol_Fa = (dom.xpath('//div[@class = "nav-links"]/div[2]/ul/li/div/div/ul/li/ul/li/a//text()'))
+    df = pd.DataFrame({'href': href, 'symbol_Fa': symbol_Fa})
+    df['count_profile'] = df['href'].apply(lambda x: x.count('profile'))
+    df = df[df['count_profile'] == 1].drop('count_profile', axis=1).set_index('symbol_Fa')
+    df['symbol_En'] = df['href'].apply(lambda x: x.split('/')[-1])
+    df['SYMBOL'] = df['symbol_En'].apply(lambda x: x.upper()) 
+    return df.drop('href', axis=1)
 
 def get_tgju_data(symbol):
     # get symbols
